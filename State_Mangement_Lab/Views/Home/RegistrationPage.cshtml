@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "RegistrationPage";
+}
+
+<h2>Registration Page</h2>
+
+<form action="~/Home/RegisterNewUser" method="post">
+    <input type="text" name="UserName" placeholder="User Name" />
+    <input type="text" name="Email" placeholder="Email" />
+    <input type="password" name="Password" placeholder="Password" />
+    Age: <input type="number" name="Age" />
+    <input type="submit" name="Register now!" />
+</form>
+
+@if (@ViewBag.ErrorMessage != null)
+{
+    <p>@ViewBag.ErrorMessage</p>
+}

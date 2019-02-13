@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "UserDetails";
+}
+
+<h2>User Details</h2>
+
+<table>
+    <tr>
+        <th>User Name</th>
+        <td>@ViewBag.CurrentUser.UserName</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>@ViewBag.CurrentUser.Email</td>
+    </tr>
+    <tr>
+        <th>Age</th>
+        <td>@ViewBag.CurrentUser.Age</td>
+    </tr>
+</table>
+
+
+<p>@Html.ActionLink("Log Out!", "Logout", "Home")</p>
+
+
