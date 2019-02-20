@@ -86,12 +86,9 @@ namespace State_Mangement_Lab.Controllers
                             return RedirectToAction("UserDetails");
                         }
                     }
-                    else
-                    {
-                        ViewBag.ErrorMessage = "Invalid User Name and Password";
-                        return View("Login");
-                    }
                 }
+                ViewBag.ErrorMessage = "Invalid User Name and Password";
+                return View("Login");
             }
 
             ViewBag.ErrorMessage = "Please register before you log in.";
