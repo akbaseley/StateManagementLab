@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "ItemsIndex";
+}
+
+<h2>Items Index</h2>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th> </th>
+    </tr>
+    @foreach (var item in ViewBag.Items)
+    {
+    <tr>
+        <td>@item.ItemName</td>
+        <td>@item.Description</td>
+        <td>@item.Price</td>
+        <td><a href="/Home/AddItemToCart?ItemName=@item.ItemName">Add to Cart</a></td>
+    </tr>
+    }
+</table>
+

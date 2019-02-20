@@ -11,6 +11,72 @@ namespace State_Mangement_Lab.Controllers
     public class HomeController : Controller
     {
         List<User> usersList = new List<User>();
+        List<Item> itemList = new List<Item>
+        {
+            new Item("Thin Crust", "Paper Thin", 4.00),
+            new Item("Deep Dish", "It's cooked in a deep dish.", 15.00),
+            new Item("White Sauce", "It's like alfredo sauce on a pizza", 8.00),
+            new Item("Pineapple", "It's like a punch of sweet with your ham and peppers", 2.00),
+            new Item("Tomato Sauce", "It's normal", 5.00)
+        };
+        List<Item> shoppingCart = new List<Item>();
+
+        public ActionResult ItemsIndex()
+        {
+            ViewBag.Items = itemList;
+            return View();
+        }
+
+        public ActionResult AddItemToCart(string ItemName)
+        {
+            //1. See if we have an active shopping cart
+            if(Session["shoppingCart"] != null)
+            {
+                //1b. remind the empty shopping cart of any information 
+                //stored in the session
+                shoppingCart = (List<Item>)Session["shoppingCart"];
+            }
+            //2. Find the item 
+            foreach(Item item in itemList)
+            {
+                //3. Add the item to the shopping cart
+                if (item.ItemName == ItemName)
+                {
+                    shoppingCart.Add(item);
+                }
+            }
+
+            Session["shoppingCart"] = shoppingCart;
+            return RedirectToAction("ItemsIndex");
+        }
+
+        public ActionResult ShoppingCart()
+        {
+            ViewBag.ShoppingCart = (List<Item>)Session["shoppingCart"];
+            return View();
+        }
+
+        public ActionResult DeleteItemFromCart(string ItemName)
+        {
+
+            //1b. remind the empty shopping cart of any information 
+            //stored in the session
+            shoppingCart = (List<Item>)Session["shoppingCart"];
+            
+            //2. Find the item 
+            foreach (Item item in shoppingCart)
+            {
+                //3. Add the item to the shopping cart
+                if (item.ItemName == ItemName)
+                {
+                    shoppingCart.Remove(item);
+                    break;  
+                }
+            }
+            //save changes to shopping cart sessions
+            Session["shoppingCart"] = shoppingCart;
+            return RedirectToAction("ShoppingCart");
+        }
 
         public ActionResult Index()
         {
